@@ -1,4 +1,4 @@
-import retry from 'async-retry';
+import retry from "async-retry";
 
 async function waitForAllServices() {
   await waitForWebServer();
@@ -10,7 +10,9 @@ async function waitForAllServices() {
     });
 
     async function fetchStatusPage() {
-      const response = await fetch("http://localhost:3000/api/v1/status?databaseName=local_db");
+      const response = await fetch(
+        "http://localhost:3000/api/v1/status?databaseName=local_db",
+      );
       if (response.status !== 200) {
         throw new Error(`Status page not available: ${response.status}`);
       }
@@ -19,5 +21,5 @@ async function waitForAllServices() {
 }
 
 export default {
-  waitForAllServices
-}
+  waitForAllServices,
+};
