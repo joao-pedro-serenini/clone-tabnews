@@ -1,4 +1,4 @@
-import { Client } from 'pg';
+import { Client } from "pg";
 
 async function query(queryObject) {
   let client;
@@ -13,7 +13,6 @@ async function query(queryObject) {
   } finally {
     await client.end();
   }
-  
 }
 
 async function getNewClient() {
@@ -31,7 +30,7 @@ async function getNewClient() {
 
 export default {
   query,
-  getNewClient
+  getNewClient,
 };
 
 function getSSLValues() {

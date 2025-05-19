@@ -12,7 +12,7 @@ export default async function migrations(request, response) {
 
   let dbClient;
 
-  try{
+  try {
     dbClient = await database.getNewClient();
     const migrationsDir =
       process.env.NODE_ENV === "production"
@@ -45,8 +45,7 @@ export default async function migrations(request, response) {
 
       return response.status(200).json(migratedMigrations);
     }
-
-  } catch(error){
+  } catch (error) {
     console.error(error);
     return response.status(500).json({
       error: "Internal server error",
