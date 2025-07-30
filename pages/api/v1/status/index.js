@@ -2,8 +2,9 @@ import database from "/infra/database.js";
 import { InternalServerError } from "infra/errors";
 
 async function status(request, response) {
-  try{
+  try {
     const updatedAt = new Date().toISOString();
+
     const databaseVersionResult = await database.query("SHOW server_version;");
     const databaseVersionValue = databaseVersionResult.rows[0].server_version;
 
@@ -36,8 +37,10 @@ async function status(request, response) {
       cause: error,
     });
 
-    console.log("\n Erro dentro do catch controller:");
+    console.log("\n Erro dentro do catch do controller:");
     console.error(publicErrorObject);
+
+    response.status(500).json(publicErrorObject);
   }
 }
 
