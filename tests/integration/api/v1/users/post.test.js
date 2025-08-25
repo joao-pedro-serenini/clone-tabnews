@@ -24,16 +24,14 @@ describe("POST /api/v1/users", () => {
       expect(response.status).toBe(201);
 
       const responseBody = await response.json();
-      expect(responseBody).toEqual(
-        {
-          id: responseBody.id,
-          username: 'joaopedro',
-          email: 'joaopedro@example.com',
-          password: 'password123',
-          created_at: responseBody.created_at,
-          updated_at: responseBody.updated_at
-        }
-      );
+      expect(responseBody).toEqual({
+        id: responseBody.id,
+        username: "joaopedro",
+        email: "joaopedro@example.com",
+        password: "password123",
+        created_at: responseBody.created_at,
+        updated_at: responseBody.updated_at,
+      });
       expect(uuidVersion(responseBody.id)).toBe(4);
       expect(Date.parse(responseBody.created_at)).not.toBeNaN();
       expect(Date.parse(responseBody.updated_at)).not.toBeNaN();
