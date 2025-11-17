@@ -1,8 +1,8 @@
 import { createRouter } from "next-connect";
+import * as cookie from "cookie";
 import controller from "infra/controller.js";
-import user from "models/user.js";
-import password from "models/password";
-import { UnauthorizedError } from "infra/errors.js"
+import authentication from "models/authentication";
+import session from "models/session";
 
 const router = createRouter();
 
@@ -12,23 +12,23 @@ export default router.handler(controller.errorHandlers);
 
 async function postHandler(request, response) {
   const userInputValues = request.body;
+
+  const authenticatedUser = await authentication.getAuthenticatedUser(
+    userInputValues.email,
+    userInputValues.password,
+  );
   
-  try{
-    const storedUser = await user.findOneByEmail(userInputValues.email)
-    const correctPasswordMatch = await password.compare(userInputValues.password, storedUser.password)
+  const newSession = await session.create(authenticatedUser.id);
 
-    if(!correctPasswordMatch) {
-        throw new UnauthorizedError({
-        message: "Senha não confere.",
-        action: "Verifique se este dado está correto."
-      })
+  const setCookie = cookie.serialize("session_id", newSession.token,
+    {
+      path: "/",
+      maxAge: session.EXPIRATION_IN_MILLISECONDS / 1000,
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
     }
-  } catch(error) {
-    throw new UnauthorizedError({
-      message: "Dados de autenticação não conferem.",
-      action: "Verifique se os dados enviados estão corretos."
-    })
-  }
+  );
+  response.setHeader("Set-Cookie", setCookie);
 
-  return response.status(201).json({});
+  return response.status(201).json(newSession);
 }
