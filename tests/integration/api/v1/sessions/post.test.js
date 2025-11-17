@@ -34,8 +34,8 @@ describe("POST /api/v1/sessions", () => {
         name: "UnauthorizedError",
         message: "Dados de autenticação não conferem.",
         action: "Verifique se os dados enviados estão corretos.",
-        status_code: 401
-      })
+        status_code: 401,
+      });
     });
 
     test("With correct `email` but incorrect `password`", async () => {
@@ -61,8 +61,8 @@ describe("POST /api/v1/sessions", () => {
         name: "UnauthorizedError",
         message: "Dados de autenticação não conferem.",
         action: "Verifique se os dados enviados estão corretos.",
-        status_code: 401
-      })
+        status_code: 401,
+      });
     });
 
     test("With incorrect `email` and incorrect `password`", async () => {
@@ -86,8 +86,8 @@ describe("POST /api/v1/sessions", () => {
         name: "UnauthorizedError",
         message: "Dados de autenticação não conferem.",
         action: "Verifique se os dados enviados estão corretos.",
-        status_code: 401
-      })
+        status_code: 401,
+      });
     });
 
     test("With correct `email` and correct `password`", async () => {
