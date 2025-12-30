@@ -1,5 +1,5 @@
-import * as cookie from "cookie"
-import session from "models/session.js"
+import * as cookie from "cookie";
+import session from "models/session.js";
 import {
   InternalServerError,
   MethodNotAllowedError,
@@ -38,9 +38,9 @@ async function setSessionCookie(sessionToken, response) {
     maxAge: session.EXPIRATION_IN_MILLISECONDS / 1000,
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
-  })
+  });
 
-  response.setHeader("Set-Cookie", setCookie)
+  response.setHeader("Set-Cookie", setCookie);
 }
 
 const controller = {
@@ -48,7 +48,7 @@ const controller = {
     onNoMatch: onNoMatchHandler,
     onError: onErrorHandler,
   },
-  setSessionCookie
+  setSessionCookie,
 };
 
 export default controller;

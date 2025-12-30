@@ -9,11 +9,11 @@ beforeAll(async () => {
   await orchestrator.runPendingMigrations();
 });
 
-describe("PATCH /api/v1/users/[username]", () => {
+describe("PATCH /api/v1/user/[username]", () => {
   describe("Anonymous user", () => {
     test("With non-existing 'username'", async () => {
       const response = await fetch(
-        "http://localhost:3000/api/v1/users/UsuarioInexistente",
+        "http://localhost:3000/api/v1/user/UsuarioInexistente",
         { method: "PATCH" },
       );
       expect(response.status).toBe(404);
@@ -36,7 +36,7 @@ describe("PATCH /api/v1/users/[username]", () => {
         username: "user2",
       });
 
-      const response = await fetch("http://localhost:3000/api/v1/users/user2", {
+      const response = await fetch("http://localhost:3000/api/v1/user/user2", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ describe("PATCH /api/v1/users/[username]", () => {
       });
 
       const response = await fetch(
-        `http://localhost:3000/api/v1/users/${createUser2.username}`,
+        `http://localhost:3000/api/v1/user/${createUser2.username}`,
         {
           method: "PATCH",
           headers: {
@@ -92,7 +92,7 @@ describe("PATCH /api/v1/users/[username]", () => {
       const createdUser = await orchestrator.createUser({});
 
       const response = await fetch(
-        `http://localhost:3000/api/v1/users/${createdUser.username}`,
+        `http://localhost:3000/api/v1/user/${createdUser.username}`,
         {
           method: "PATCH",
           headers: {
@@ -125,7 +125,7 @@ describe("PATCH /api/v1/users/[username]", () => {
       const createdUser = await orchestrator.createUser({});
 
       const response = await fetch(
-        `http://localhost:3000/api/v1/users/${createdUser.username}`,
+        `http://localhost:3000/api/v1/user/${createdUser.username}`,
         {
           method: "PATCH",
           headers: {
@@ -160,7 +160,7 @@ describe("PATCH /api/v1/users/[username]", () => {
       });
 
       const response = await fetch(
-        `http://localhost:3000/api/v1/users/${createdUser.username}`,
+        `http://localhost:3000/api/v1/user/${createdUser.username}`,
         {
           method: "PATCH",
           headers: {

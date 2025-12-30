@@ -26,11 +26,10 @@ async function findOneById(id) {
       throw new NotFoundError({
         message: "O id informado não foi encontrado no sistema.",
         action: "Verifique se o id está digitado corretamente.",
-      })
+      });
     }
 
     return results.rows[0];
-    
   }
 }
 

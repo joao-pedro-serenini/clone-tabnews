@@ -6,7 +6,7 @@ const EXPIRATION_IN_MILLISECONDS = 60 * 60 * 24 * 30 * 1000; // 30 DAYS
 
 async function findOneValidByToken(sessionToken) {
   const sessionFound = await runSelectQuery(sessionToken);
-  
+
   return sessionFound;
 
   async function runSelectQuery(sessionToken) {
@@ -23,7 +23,7 @@ async function findOneValidByToken(sessionToken) {
           1
         ;
       `,
-      values: [sessionToken]
+      values: [sessionToken],
     });
 
     if (results.rowCount === 0) {
